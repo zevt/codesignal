@@ -21,4 +21,33 @@ class HeapsStacksQueuesTest extends AnyFunSuite with Matchers {
   test("kthLargestElement 2") {
     kthLargestElement(Array(1,4,3,2), 1) shouldEqual 4
   }
+
+
+  test("decodeString 1") {
+    decodeString("2[a]") shouldEqual "aa"
+  }
+
+  test("decodeString 2") {
+    decodeString("b2[a]") shouldEqual "baa"
+  }
+
+  test("decodeString 3") {
+    decodeString("2[a]3[b]4[c]5[d]") shouldEqual "aabbbccccddddd"
+  }
+  test("decodeString 4") {
+    decodeString("x2[a]3[b]4[c]5[d]") shouldEqual "xaabbbccccddddd"
+  }
+
+  test("decodeString 5") {
+    decodeString("x2[a]3[b]4[c]5[d]z") shouldEqual "xaabbbccccdddddz"
+  }
+
+  test("decodeString 6") {
+    decodeString("2[abc]3[cd]ef") shouldEqual "abcabccdcdcdef"
+  }
+
+  test("decodeString 7") {
+    decodeString("sd2[f2[e]g]i") shouldEqual "sdfeegfeegi"
+  }
+
 }
