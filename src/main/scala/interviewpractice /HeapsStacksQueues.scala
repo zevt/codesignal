@@ -56,5 +56,80 @@ object HeapsStacksQueues {
 
   }
 
+//  https://app.codesignal.com/interview-practice/task/dYCH8sdnxGf5aGkez
+  def decodeString(s: String): String = {
+
+    var st = Array[Any]()
+    var i = 0
+    while (i < s.length) {
+      var number = Array[Char]()
+      while (i < s.length && s(i) >= '0' && s(i) <= '9') {
+         number = s(i) +: number
+        i += 1
+      }
+      if (number.nonEmpty) {
+        st = number.reverse.mkString.toInt +: st
+      }
+      var word = Array[Char]()
+      while (i < s.length && s(i) >= 'a' && s(i) <= 'z') {
+        word = s(i) +: word
+        i += 1
+      }
+      if (word.nonEmpty) {
+        st = word.reverse.mkString +: st
+      }
+      if (i < s.length && s(i) == '[') {
+        i += 1
+      } else if (i < s.length && s(i) == ']') {
+        var w = st.head.asInstanceOf[String]
+        st = st.tail
+        while (st.nonEmpty && st.head.isInstanceOf[String]) {
+          w = st.head + w
+          st = st.tail
+        }
+        val n = st.head.asInstanceOf[Int]
+        st = st.tail
+        var currentW = Array.fill(n)(w).mkString
+
+        while (st.nonEmpty && !st.head.isInstanceOf[Int]) {
+          currentW = st.head.asInstanceOf[String] + currentW
+          st = st.tail
+        }
+        st = currentW +: st
+        i += 1
+      }
+    }
+    st.reverse.mkString
+  }
+
+//  TODO: Simplify this solution
+//  def decodeString2(s: String): String = {
+//    var number = Array[Char]()
+//    var word = Array[Char]()
+//    var st = Array[Any]()
+//    for (c <- s) {
+//      if (c >= 'a' && c <= 'z') {
+//        if (number.nonEmpty) {
+//          st = number.reverse.toString.toInt +: st
+//          number = Array.empty
+//        }
+//        word = c +: word
+//      } else if (c >= '0' && c <= '9') {
+//        if (word.nonEmpty) {
+//          st = word.reverse.toString +: st
+//          word = Array.empty
+//        }
+//        number = c +: number
+//      } else if (c == '[') {
+//        if (number.nonEmpty) {
+//          st = number.reverse.toString.toInt +: st
+//          number = Array.empty
+//        }
+//      } else {
+//
+//      }
+//
+//    }
+//  }
 
 }
